@@ -6,7 +6,7 @@ class Tour(models.Model):
     description = models.TextField()
     duration = models.IntegerField(default=0)
     price = models.PositiveIntegerField(default=0)
-    image = models.FileField(blank=True)
+    image = models.FileField(blank=True, upload_to='images')
 
     def __str__(self):
         return self.name
@@ -14,6 +14,7 @@ class Tour(models.Model):
     class Meta:
         verbose_name = 'Тур'
         verbose_name_plural = 'Туры'
+
 
 class TourImage(models.Model):
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='tour_images')
