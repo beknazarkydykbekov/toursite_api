@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'mainapp',
     'rest_framework',
     'drf_yasg',
+    'corsheaders',
 ]
 
 
@@ -46,6 +47,7 @@ SWAGGER_SETTINGS = {
 
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,6 +77,19 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'toursite.wsgi.application'
+
+
+# CORS WHITELIST
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8000",
+    "https://relaxed-curie-e9a516.netlify.app",
+    "http://127.0.0.1:8080"
+]
+
+CORS_ORIGIN_REGEX_WHITELIST = [
+    r"^https://\w+\.netlify\.app$",
+]
+
 
 
 # Database
@@ -129,6 +144,34 @@ TIME_ZONE = 'Asia/Bishkek'
 USE_I18N = True
 
 USE_TZ = True
+
+# CORS
+CORS_ALLOWED_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://192.168.0.1:8000',
+    'http://localhost:8000'
+]
+
+CORS_ALLOW_METHOD = [
+    'DELETE',
+    'POST',
+    'GET',
+    'PUT',
+    'PATCH',
+    'OPTIONS',
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encouding',
+    'origin',
+    'user-agent',
+    'rest_framework.authtoken',
+    'x-csrftoken',
+    'x-requested-with',
+    'authorization'
+]
 
 
 # Static files (CSS, JavaScript, Images)
