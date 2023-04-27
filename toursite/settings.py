@@ -149,11 +149,15 @@ USE_TZ = True
 CORS_ALLOWED_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://192.168.0.1:8000',
-    'http://localhost:8000'
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:3000",
+    "http://127.0.0.1:9000",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://change.allowed.com",
+]
 CORS_ALLOW_METHOD = [
     'DELETE',
     'POST',
