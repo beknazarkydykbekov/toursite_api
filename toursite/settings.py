@@ -13,6 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-wjk90^^)j*ct#o^#mh@h=cdg1@-&7+o78&3+v)mi584tnxs9zs'
 
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8009']
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -47,8 +50,8 @@ SWAGGER_SETTINGS = {
 
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,8 +85,7 @@ WSGI_APPLICATION = 'toursite.wsgi.application'
 # CORS WHITELIST
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
-    "https://relaxed-curie-e9a516.netlify.app",
-    "http://127.0.0.1:8080"
+    "http://127.0.0.1:8000"
 ]
 
 CORS_ORIGIN_REGEX_WHITELIST = [
@@ -97,8 +99,12 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'toursitedb',
+        'USER': 'toursitedbuser',
+        'PASSWORD': 'qfdhfkdfr34greir453',
+        'HOST': '10.100.15.98',
+        'PORT': '5432',
     }
 }
 
@@ -176,6 +182,9 @@ CORS_ALLOW_METHOD = [
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

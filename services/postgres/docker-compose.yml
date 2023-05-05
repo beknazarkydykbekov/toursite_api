@@ -1,0 +1,21 @@
+version: '3.3'
+
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: toursitedb
+      POSTGRES_USER: toursitedbuser
+      POSTGRES_PASSWORD: qfdhfkdfr34greir453
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_data:
+
+

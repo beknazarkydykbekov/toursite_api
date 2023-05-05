@@ -1,0 +1,50 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: toursitedb
+      POSTGRES_USER: toursitedbuser
+      POSTGRES_PASSWORD: qfdhfkdfr34greir453
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    links:
+      - postgres:postgres
+    restart: always
+    entrypoint: '/app/web-runner.sh'
+    expose:
+      - 8000
+    volumes:
+      - media:/app/media
+      - static:/app/static
+    depends_on:
+      - postgres
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - '8000:80'
+    volumes:
+      - ../../nginx/nginx.dev.conf:/etc/nginx/conf.d/default.conf
+      - media:/app/media
+      - static:/app/static
+    depends_on:
+      - web
+
+
+volumes:
+  media:
+  static:
+  postgres_data:
